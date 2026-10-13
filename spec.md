@@ -43,7 +43,10 @@ Example:
 ```lua
 local TAB_WIDTH = 4      -- input: 1 tab = N spaces
 local OUTPUT_INDENT = "  " -- output: strict 2 spaces per level in board.md
+local OUTPUT_STATUS_INDENT = "&nbsp;&nbsp;" -- Status col indent for subtasks
 ```
+- Markdown renderers collapse plain spaces inside tables, so Status uses `&nbsp;&nbsp;`.
+  Plain `.md` readers: replace with 2 spaces — `sed 's/&nbsp;&nbsp;/  /g' board.md`.
 
 ### 3.3 Output indent (strict)
 - In `board.md` tables, always `OUTPUT_INDENT` (2 spaces) per level, regardless of input width.
@@ -70,8 +73,16 @@ local OUTPUT_INDENT = "  " -- output: strict 2 spaces per level in board.md
 ### View 2: Task list
 - Flat, in file order: `| Status | Task | Tags |`
 - Status = line's OWN status (so `[x]` child under `[/]` parent shows as Done).
-- Task = level 1 as-is, level >= 2 with single `OUTPUT_INDENT + ↳` prefix (flat, just to spot top-level tasks easily, no matter deep level).
+  - Level 1 as-is (`Done`), level >= 2 with single `OUTPUT_STATUS_INDENT` prefix (`&nbsp;&nbsp;Done`) — flat, just to spot top-level tasks easily, no matter deep level.
+  - Plain spaces collapse in rendered markdown, hence `&nbsp;`. For plain-text reading replace `&nbsp;&nbsp;` with 2 spaces.
+- Task = level 1 as-is, level >= 2 with single `OUTPUT_INDENT + ↳` prefix (flat, same rule as Status).
 - Tags = `@a, @b`.
+- Example:
+```md
+| Status | Task | Tags |
+| Done | Install Lua | @setup |
+| &nbsp;&nbsp;Todo |   ↳ subtask | @todo |
+```
 
 ## 6. Learning goals
 - `io.open`, `tables`, `string.match/gmatch`, `for` loops, stack for tree, `arg` for CLI.
