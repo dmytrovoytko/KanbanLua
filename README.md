@@ -50,7 +50,6 @@ Input `tasks.md`:
 
 Run `lua kanban.lua`, you get `board.md`:
 
-```md
 # Kanban Board
 
 _8 tasks: 2 Backlog | 3 Todo | 1 Doing | 2 Done_
@@ -73,22 +72,6 @@ _8 tasks: 2 Backlog | 3 Todo | 1 Doing | 2 Done_
 | &nbsp;&nbsp;Done |   ↳ subtask 2.1 | @done |
 | &nbsp;&nbsp;Todo |   ↳ subtask 2.3 | @todo |
 | Done | Install Lua | @setup |
-```
-
-```md
-## Task list (clearer)
-
-| Status | Task | Tags |
-| --- | --- | --- |
-| Backlog | Some idea | @blog |
-|   Backlog |   ↳ some detail 1 | @draft |
-| Todo | Task 1 | @lua |
-|   Todo |   ↳ subtask 1 | @learning |
-| Doing | Task 2 | @coding |
-|   Done |   ↳ subtask 2.1 | @done |
-|   Todo |   ↳ subtask 2.3 | @todo |
-| Done | Install Lua | @setup |
-```
 
 Notes:
 - Board groups only by top-level status. Children stay nested under the parent but keep their own `[ ]/[/]/[~]/[x]` marker.
